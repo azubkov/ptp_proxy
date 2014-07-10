@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--core Module-->
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration>
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p: [%t] %C{1} - %m\n"/>
+        </layout>
+
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMax" value="FATAL"/>
+            <param name="LevelMin" value="DEBUG"/>
+            <!--<param name="LevelMax" value="WARN"/>-->
+            <!--<param name="LevelMin" value="INFO"/>-->
+        </filter>
+    </appender>
+    <appender name="ROLLING_FILE" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="ptp.log"/>
+        <param name="MaxFileSize" value="20MB"/>
+        <param name="MaxBackupIndex" value="20"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p: [%t] %l: %m\n"/>
+        </layout>
+    </appender>
+
+    <logger name="github.com.azubkov.ptp_proxy.PTPProxyMain">
+        <level value="info"/>
+    </logger>
+
+    <logger name="github.com.azubkov.ptp_proxy.hex.HexDumpProxyInboundHandler">
+        <level value="info"/>
+    </logger>
+
+    <logger name="github.com.azubkov.ptp_proxy.http.HttpProxyInboundHandler">
+        <level value="info"/>
+    </logger>
+
+    <root>
+        <priority value="error"></priority>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ROLLING_FILE"/>
+    </root>
+</log4j:configuration>
